@@ -1,0 +1,22 @@
+{% extends "myrestaurants/base.html" %}
+
+{% block content %}
+
+<h3>
+  {{ dish.name }}
+  {% if request.user == dish.user %}
+    (<a href="{% url 'myrestaurants:dish_edit' dish.restaurant.id dish.id %}">修改</a>)
+  {% endif %}
+</h3>
+<p> 餐厅: <a href="{% url 'myrestaurants:restaurant_detail' dish.restaurant.id %}">
+    {{ dish.restaurant.name}}
+</a></p>
+
+<p>{{ dish.description }}</p>
+
+{% if dish.image %}
+  <p><img src="{{ dish.image.url }}"/></p>
+{% endif %}
+  <p>价格: {{ dish.price }}元</p>
+
+{% endblock %}
